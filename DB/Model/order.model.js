@@ -22,6 +22,11 @@ const orderSchema = new Schema({
     finalPrice: { type: Number, default: 1, required: true },
     paymentType: { type: String, default: 'cash', enum: ['cash', 'card'] },
     status: { type: String, default: 'placed', enum: ['waitPayment', 'placed', 'canceled', 'rejected', 'onWay', 'delivered'] },
+    translations: {
+        en: { type: String, trim: true },
+        ar: { type: String, trim: true },
+        // Add more languages if needed
+    },
 }, {
     timestamps: true,
 });

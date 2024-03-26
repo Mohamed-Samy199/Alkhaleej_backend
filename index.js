@@ -5,10 +5,9 @@ import chalk from "chalk";
 
 
 const app = express();
-config({ path: "./config/.env" })
-const port = process.env.PORT;
-// app.set('case sensitive routing' , true);
-initApp(app, express)
+config({ path: "./config/.env" });
+const port = process.env.PORT || 5000;
 
+initApp(app, express);
 
 app.listen(port, () => console.log(chalk.blue(`server is running on port ${port}`)));

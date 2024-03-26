@@ -1,13 +1,14 @@
 import { Router } from "express";
-import { createReview, updateReview } from "./review.controller.js";
+import { createReview, deleteReview, getAllReviews } from "./review.controller.js";
 import { asyncHandle } from "../../Utils/errorHandle.js";
-import { auth } from "../../Middelware/authuntication.js";
+import { auth, roles } from "../../Middelware/authuntication.js";
 import { endPoint } from "./review.endPoint.js";
 
 const reviewRouter = Router({ mergeParams: true });
 
+reviewRouter.get("/:productId", asyncHandle(getAllReviews));
 reviewRouter.post("/", auth(endPoint.user), asyncHandle(createReview));
-reviewRouter.put("/:reviewId", auth(endPoint.user), asyncHandle(updateReview));
+reviewRouter.delete("/:productId/:reviewId", auth(Object.values(roles)), asyncHandle(deleteReview));
 
 
 export default reviewRouter;

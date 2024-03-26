@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { myMulter } from "../../Utils/multer.js";
-import { createCategorey, getCategory, updateCategory } from "./category.controller.js";
+import { myMulter, validationObject } from "../../Utils/multer.js";
+import { createCategorey, deleteCategory, getCategory } from "./category.controller.js";
 import { asyncHandle } from "../../Utils/errorHandle.js";
 import { validationCategory } from "../Auth/auth.validation.js";
 import { validation } from "../../Middelware/validation.js";
@@ -14,7 +14,7 @@ categoryRouter.use("/:categoryId/subcategory", subcategoryRouter)
 
 categoryRouter.get("/", asyncHandle(getCategory));
 
-categoryRouter.post("/", auth(endPoint.admin), myMulter({}).single("image"), validation(validationCategory), asyncHandle(createCategorey));
-categoryRouter.put("/:categoryId", auth(endPoint.admin), myMulter({}).single("image"), asyncHandle(updateCategory));
+categoryRouter.post("/", auth(endPoint.admin), myMulter({}).single("image"), asyncHandle(createCategorey));
+categoryRouter.delete("/:categoryId", auth(endPoint.admin), asyncHandle(deleteCategory));
 
 export default categoryRouter;

@@ -23,7 +23,23 @@ const productSchema = new Schema({
     createdBy: { type: Types.ObjectId, ref: "User", required: true },
     updatedBy: { type: Types.ObjectId, ref: "User" },
     wishUserList: [{ type: Types.ObjectId, ref: "User" }],
-    isDeleted: { type: Boolean, default: false }
+    isDeleted: { type: Boolean, default: false },
+
+    translations: {
+        en: { type: String, trim: true },
+        ar: { type: String, trim: true },
+        // Add more languages if needed
+    },
+    translationsSlug: {
+        en: { type: String, trim: true },
+        ar: { type: String, trim: true },
+        // Add more languages if needed
+    },
+    translationsDesc: {
+        en: { description: { type: String, trim: true } },
+        ar: { description: { type: String, trim: true } },
+        // Add more languages if needed
+    },
 }, {
     timestamps: true,
     toJSON: { virtuals: true },

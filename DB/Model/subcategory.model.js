@@ -7,7 +7,12 @@ const subcategorySchema = new Schema({
     categoryId: { type: Types.ObjectId, ref: "Category", required: true },
     createBy: { type: Types.ObjectId, ref: "User", required: true },
     updatedBy: { type: Types.ObjectId, ref: "User" },
-    customId: { type: String, required: true, unique: true }
+    customId: { type: String, required: true, unique: true },
+    translations: {
+        en: { type: String, trim: true },
+        ar: { type: String, trim: true },
+        // Add more languages if needed
+    },
 }, {
     timestamps: true,
     toJSON: { virtuals: true },

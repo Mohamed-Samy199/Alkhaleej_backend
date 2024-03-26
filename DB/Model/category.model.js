@@ -5,8 +5,12 @@ const categorySchema = new Schema({
     image: { type: Object, required: true },
     slug: { type: String, required: true, trim: true, lowerCase: true },
     createdBy: { type: Types.ObjectId, ref: "User", required: true },
-    updatedBy: { type: Types.ObjectId, ref: "User" }
-
+    updatedBy: { type: Types.ObjectId, ref: "User" },
+    translations: {
+        en: { type: String, trim: true },
+        ar: { type: String, trim: true },
+        // Add more languages if needed
+    },
 }, {
     timestamps: true,
     toJSON: { virtuals: true },

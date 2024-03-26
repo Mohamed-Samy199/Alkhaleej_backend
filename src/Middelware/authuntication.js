@@ -18,6 +18,7 @@ export const auth = (accessRoles = []) => {
             return next(new Error("In-valid token", { cause: 400 }));
         }
         const decoded = veryfiyToken({ token });
+
         if (!decoded?.id) {
             return next(new Error("In-valid token payload", { cause: 400 }));
         }
@@ -26,7 +27,6 @@ export const auth = (accessRoles = []) => {
             return next(new Error("Not register user", { cause: 401 }));
         }
         // log out from all device when change and update password...
-        // console.log({changePasswordTime : parseInt(user.changePasswordTime?.getTime() / 1000) , iat : decoded.iat});
         if (parseInt(user.changePasswordTime?.getTime() / 1000) > decoded.iat) {
             return next(new Error("Expire Token", { cause: 400 }));
         }

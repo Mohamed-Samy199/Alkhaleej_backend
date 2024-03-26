@@ -7,7 +7,12 @@ const cartSchema = new Schema({
         quntity: { type: Number, default: 1, required: true },
     }],
     numOfCartItems: { type: Number },
-    totalCartPrice: { type: Number }
+    totalCartPrice: { type: Number },
+    translations: {
+        en: { type: String, trim: true },
+        ar: { type: String, trim: true },
+        // Add more languages if needed
+    },
 }, {
     timestamps: true,
 });

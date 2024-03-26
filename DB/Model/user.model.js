@@ -18,49 +18,42 @@ const userSchema = new Schema({
         type: String,
         required: [true, 'user password is required'],
     },
-    confirmEmail: {
-        type: Boolean,
-        default: false
+    provider : {
+        type : String,
+        default: "system",
+        enum : ['system', 'facebook', 'GOOGLE']
     },
-    forgetCode: {
-        type: Number,
-        default: null
-    },
-    phone: Number,
-    DOF: String,
-    address: String,
     image: Object,
     changePasswordTime: Date,
-    gender: {
-        type: String,
-        default: "male",
-        enum: ["male", "female"]
-    },
     role: {
         type: String,
         default: "User",
         enum: ["User", "Admin"]
     },
+    wishlist: {
+        type: [{ type: Types.ObjectId, ref: "Product" }],
+    },
+    numOfCartItems: { type: Number },
     status: {
         type: String,
         default: "offline",
         enum: ["online", "offline", "blocked"]
     },
-    wishlist: {
-        type: [{ type: Types.ObjectId, ref: "Product" }],
+    translations: {
+        en: { type: String, trim: true },
+        ar: { type: String, trim: true },
+        // Add more languages if needed
     },
-    numOfCartItems: { type: Number },
 }, {
     timestamps: true,
     toJSON: { virtuals: true },
     toObject: { virtuals: true }
 });
-
 userSchema.virtual('order', {
     ref: "Order",
     localField: "_id",
     foreignField: "userId"
-})
+});
 
 const userModel = mongoose.models.User || model('User', userSchema);
 

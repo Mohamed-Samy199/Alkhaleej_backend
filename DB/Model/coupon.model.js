@@ -8,7 +8,12 @@ const couponSchema = new Schema({
     usedBy: [{ type: Types.ObjectId, ref: "User" }],
     createBy: { type: Types.ObjectId, ref: "User", required: true },
     updatedBy: { type: Types.ObjectId, ref: "User" },
-    url: String
+    url: String,
+    translations: {
+        en: { type: String, trim: true },
+        ar: { type: String, trim: true },
+        // Add more languages if needed
+    },
 }, {
     timestamps: true,
 });

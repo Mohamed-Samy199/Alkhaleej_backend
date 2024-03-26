@@ -18,8 +18,8 @@ function generateHeader(doc) {
         .image("logo.jpg", 50, 45, { width: 150 })
         .fillColor("#444444")
         .fontSize(20)
-        .text("ACME Inc.", 200, 60)
-        .fontSize(15)
+        // .text("ACME Inc.", 200, 60)
+        // .fontSize(15)
         .text("ACME Inc.", 200, 50, { align: "right" })
         .text("123 Main Street", 200, 65, { align: "right" })
         .text("New York, NY, 10025", 200, 80, { align: "right" })
@@ -177,7 +177,7 @@ function generateHr(doc, y) {
 }
 
 function formatCurrency(cents) {
-    return "$" + (cents / 100).toFixed(2);
+    return "EGP " + (cents / 100).toFixed(2);
 }
 
 function formatDate(date) {

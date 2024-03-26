@@ -8,6 +8,11 @@ const brandSchema = new Schema({
 
     // update
     categoryId: { type: Types.ObjectId, ref: "Category", required: true },
+    translations: {
+        en: { type: String, trim: true },
+        ar: { type: String, trim: true },
+        // Add more languages if needed
+    },
 }, {
     timestamps: true,
     toJSON: { virtuals: true },

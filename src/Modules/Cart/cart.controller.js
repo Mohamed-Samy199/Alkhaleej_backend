@@ -75,3 +75,27 @@ export const clearCart = async (req, res, next) => {
     const cart = await emptyCart(userId);
     return res.status(200).json({ message: "Done", cart })
 }
+export const updateCartQuantity = async (req , res , next) => {
+    const {productId , action} = req.params;
+    // const {action} = req.body;
+
+    let cart = await cartModel.findOne({userId : req.user._id});
+    if (!cart) {
+        return next(new Error("not there cart" , {cause : 400}));
+    }
+    // Check if the product is already in the cart
+    const productIndex = cart.products.findIndex(product => product.productId.equals(productId));
+
+    if (productIndex != -1) {
+        if (action === 'increase') {
+            cart.products[productIndex].quntity += 1;
+        }else if(action === 'decrease' &&  cart.products[productIndex].quntity > 1){
+            cart.products[productIndex].quntity -= 1;
+        }else{
+            return next(new Error("product not found in the cart" , {cause : 400}));
+        }
+    }
+
+    cart = await cart.save();
+    return res.status(200).json({message : "Done" , cart})
+}
